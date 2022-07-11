@@ -1,0 +1,18 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 10rem;
+  border-bottom: 1px solid var(--yellow);
+  width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 2rem 5rem;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+}
