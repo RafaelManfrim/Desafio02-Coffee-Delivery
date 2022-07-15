@@ -1,0 +1,96 @@
+.introContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 10rem;
+  width: 100%;
+  background: url("../../assets/backgroud-home.png");
+  height: 544px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media (max-width: 768px) {
+    padding: 2rem 5rem;
+  }
+
+  >div {
+    gap: 3.5rem;
+
+    h1 {
+      font-size: 3rem;
+      line-height: 130%;
+      font-weight: 800;
+      font-family: 'Baloo 2', cursive;
+      margin-bottom: 1rem;
+    }
+
+    span {
+      font-size: 1.25rem;
+      line-height: 130%;
+
+    }
+
+    .advantagesList {
+      margin-top: 4.125rem;
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 1.25rem;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--base-text);
+
+        &:first-child {
+          margin-right: 1.25rem;
+        }
+
+        &:nth-child(2n+3) {
+          margin-right: 1.25rem;
+        }
+
+        div {
+          width: 2rem;
+          height: 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          color: var(--background);
+        }
+
+        .bgYellow {
+          background-color: var(--yellow);
+        }
+
+        .bgPurple {
+          background-color: var(--purple);
+        }
+
+        .bgYellowDark {
+          background-color: var(--yellow-dark);
+        }
+
+        .bgText {
+          background-color: var(--base-text);
+        }
+      }
+    }
+
+  }
+
+}
+
+.listContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 10rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 2rem 5rem;
+  }
+}
