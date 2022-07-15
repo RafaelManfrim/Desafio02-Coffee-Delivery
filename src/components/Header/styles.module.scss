@@ -1,18 +1,71 @@
-.header-container {
+.headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem 10rem;
-  border-bottom: 1px solid var(--yellow);
   width: 100%;
 
   @media (max-width: 768px) {
     padding: 2rem 5rem;
   }
+}
 
-  div {
+.headerMenu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  button {
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    line-height: 0;
+    font-size: 0.875rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .location {
+    background: var(--purple-light);
+    color: var(--purple-dark);
+    gap: 0.25rem;
+    transition: background 0.2s ease-in-out;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
+  }
+
+  .cart {
+    position: relative;
+
+    .cartButton {
+      background: var(--yellow-light);
+      color: var(--yellow-dark);
+      transition: background 0.2s ease-in-out;
+
+      &:hover {
+        filter: brightness(0.95);
+      }
+    }
+
+    .cartBadge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      height: 20px;
+      width: 20px;
+      background: var(--yellow-dark);
+      color: var(--white);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      line-height: 130%;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
