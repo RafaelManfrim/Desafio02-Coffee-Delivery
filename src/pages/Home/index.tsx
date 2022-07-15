@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 
 import copoImg from '../../assets/copo.png'
 import { CoffeeCard } from '../../components/CoffeCard'
+import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 import { api } from '../../services/api'
 import { CoffeeDTO } from '../../types/CoffeeDTO'
 
@@ -10,6 +11,8 @@ import styles from './styles.module.scss'
 
 export function Home() {
   const [coffees, setCoffees] = useState<CoffeeDTO[]>([])
+
+  const { width } = useWindowDimensions()
 
   useEffect(() => {
     async function loadCoffees() {
@@ -62,10 +65,12 @@ export function Home() {
             </span>
           </div>
         </div>
-        <img
-          src={copoImg}
-          alt="Imagem de copo com uma faixa cinza contendo o logo da Coffe Delivery e vários grão de café ao redor"
-        />
+        {width > 1440 && (
+          <img
+            src={copoImg}
+            alt="Imagem de copo com uma faixa cinza contendo o logo da Coffe Delivery e vários grão de café ao redor"
+          />
+        )}
       </section>
       <main className={styles.listContainer}>
         <h2>Nossos cafés</h2>

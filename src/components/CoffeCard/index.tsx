@@ -29,7 +29,7 @@ export function CoffeeCard({
 
         <div>
           <div className={styles.priceContainer}>
-            <span>{price}</span>
+            R$ <span>{price}</span>
           </div>
           <div> - 1 + </div>
           <div>

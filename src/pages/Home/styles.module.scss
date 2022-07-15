@@ -10,6 +10,10 @@
   background-size: cover;
   background-position: center;
 
+  @media (max-width: 1440px) {
+    padding: 2rem 8rem;
+  }
+
   @media (max-width: 768px) {
     padding: 2rem 5rem;
   }
@@ -80,12 +84,15 @@
     }
 
   }
-
 }
 
 .listContainer {
   padding: 2rem 10rem;
   width: 100%;
+
+  @media (max-width: 1440px) {
+    padding: 2rem 8rem;
+  }
 
   @media (max-width: 768px) {
     padding: 2rem 5rem;
@@ -101,7 +108,19 @@
 
   .productList {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     gap: 2rem;
+
+    @media (max-width: 1920px) {
+      grid-template-columns: auto auto auto auto;
+    }
+
+    @media (max-width: 1440px) {
+      grid-template-columns: auto auto auto;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: auto auto;
+    }
   }
 }
