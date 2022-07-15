@@ -1,10 +1,29 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import { useEffect, useState } from 'react'
 
 import copoImg from '../../assets/copo.png'
+import { CoffeeCard } from '../../components/CoffeCard'
+import { api } from '../../services/api'
+import { CoffeeDTO } from '../../types/CoffeeDTO'
 
 import styles from './styles.module.scss'
 
 export function Home() {
+  const [coffees, setCoffees] = useState<CoffeeDTO[]>([])
+
+  useEffect(() => {
+    async function loadCoffees() {
+      try {
+        const response = await api.get('/coffees')
+        setCoffees(response.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    loadCoffees()
+  }, [])
+
   return (
     <div>
       <section className={styles.introContainer}>
@@ -48,7 +67,22 @@ export function Home() {
           alt="Imagem de copo com uma faixa cinza contendo o logo da Coffe Delivery e vários grão de café ao redor"
         />
       </section>
-      <main className={styles.listContainer}>CoffeList</main>
+      <main className={styles.listContainer}>
+        <h2>Nossos cafés</h2>
+        <div className={styles.productList}>
+          {coffees.map((coffee) => (
+            <CoffeeCard
+              key={coffee.id}
+              id={coffee.id}
+              image={coffee.image}
+              description={coffee.description}
+              name={coffee.name}
+              tags={coffee.tags}
+              price={coffee.price}
+            />
+          ))}
+        </div>
+      </main>
     </div>
   )
 }

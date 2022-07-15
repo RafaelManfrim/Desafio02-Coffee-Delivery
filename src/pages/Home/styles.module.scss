@@ -84,13 +84,24 @@
 }
 
 .listContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 2rem 10rem;
   width: 100%;
 
   @media (max-width: 768px) {
     padding: 2rem 5rem;
+  }
+
+  >h2 {
+    font-size: 2rem;
+    line-height: 130%;
+    font-weight: 800;
+    font-family: 'Baloo 2', cursive;
+    margin-bottom: 2rem;
+  }
+
+  .productList {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 2rem;
   }
 }
