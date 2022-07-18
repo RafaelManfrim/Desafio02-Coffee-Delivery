@@ -1,0 +1,90 @@
+.successContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 10rem;
+  width: 100%;
+
+  @media (max-width: 1440px) {
+    padding: 2rem 8rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 5rem;
+  }
+}
+
+.successContainerInformations {
+
+  h2 {
+    color: var(--yellow-dark);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 130%;
+  }
+
+  p {
+    color: var(--base-subtitle);
+    font-size: 1.25rem;
+    line-height: 130%;
+  }
+}
+
+.orderInformation {
+  margin-top: 2.5rem;
+  position: relative;
+  border: solid 1px transparent;
+  border-radius: 6px 36px;
+  padding: 2.5rem;
+  background: var(--background);
+  background-clip: padding-box;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -1px;
+    border-radius: inherit;
+    background: linear-gradient(to right, #DBAC2C, #8047F8);
+  }
+}
+
+.information {
+  display: flex;
+  gap: 0.75rem;
+
+  &+.information {
+    margin-top: 2rem;
+  }
+
+  .iconCircle {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--background);
+  }
+
+  .bgYellow {
+    background-color: var(--yellow);
+  }
+
+  .bgPurple {
+    background-color: var(--purple);
+  }
+
+  .bgYellowDark {
+    background-color: var(--yellow-dark);
+  }
+
+  .informationText {
+    display: flex;
+    flex-direction: column;
+  }
+}
