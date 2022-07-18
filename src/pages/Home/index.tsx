@@ -1,31 +1,15 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
-import { useEffect, useState } from 'react'
 
-import copoImg from '../../assets/copo.png'
 import { CoffeeCard } from '../../components/CoffeeCard'
+import { useCoffees } from '../../hooks/useCoffees'
 import { useWindowDimensions } from '../../hooks/useWindowDimensions'
-import { api } from '../../services/api'
-import { CoffeeDTO } from '../../types/CoffeeDTO'
+import copoImg from '../../assets/copo.png'
 
 import styles from './styles.module.scss'
 
 export function Home() {
-  const [coffees, setCoffees] = useState<CoffeeDTO[]>([])
-
+  const { coffees } = useCoffees()
   const { width } = useWindowDimensions()
-
-  useEffect(() => {
-    async function loadCoffees() {
-      try {
-        const response = await api.get('/coffees')
-        setCoffees(response.data)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-
-    loadCoffees()
-  }, [])
 
   return (
     <div>

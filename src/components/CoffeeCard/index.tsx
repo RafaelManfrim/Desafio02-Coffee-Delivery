@@ -1,4 +1,6 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { useState } from 'react'
+import { useCart } from '../../hooks/useCart'
 
 import { CoffeeDTO } from '../../types/CoffeeDTO'
 
@@ -7,12 +9,25 @@ import styles from './styles.module.scss'
 type CoffeeCardProps = CoffeeDTO
 
 export function CoffeeCard({
+  id,
   name,
   description,
   image,
   tags,
   price,
 }: CoffeeCardProps) {
+  const [coffeeAmount, setCoffeeAmount] = useState(1)
+  const { addCoffeeToCart } = useCart()
+
+  function handleAddCoffeeToCart() {
+    addCoffeeToCart({
+      coffeeId: id,
+      amount: coffeeAmount,
+    })
+
+    setCoffeeAmount(1)
+  }
+
   return (
     <div className={styles.cardContainer}>
       <div className={styles.coffeeImageContainer}>
@@ -33,15 +48,18 @@ export function CoffeeCard({
           </div>
           <div className={styles.addToCartContainer}>
             <div className={styles.selectAmountContainer}>
-              <button>
+              <button onClick={() => setCoffeeAmount((state) => state - 1)}>
                 <Minus weight="bold" size={16} />
               </button>
-              <span>1</span>
-              <button>
+              <span>{coffeeAmount}</span>
+              <button onClick={() => setCoffeeAmount((state) => state + 1)}>
                 <Plus weight="bold" size={16} />
               </button>
             </div>
-            <button className={styles.addToCartButton}>
+            <button
+              className={styles.addToCartButton}
+              onClick={handleAddCoffeeToCart}
+            >
               <ShoppingCart size={22} weight="fill" />
             </button>
           </div>
