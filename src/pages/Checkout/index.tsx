@@ -1,4 +1,5 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
+import { CoffeeInCartCard } from '../../components/CoffeeInCartCard'
 
 import styles from './styles.module.scss'
 
@@ -45,8 +46,11 @@ export function Checkout() {
       <div className={styles.cartContainer}>
         <h4>Cafés selecionados</h4>
         <div>
-          <div>Carrinho</div>
           <div>
+            <CoffeeInCartCard />
+            <CoffeeInCartCard />
+          </div>
+          <div className={styles.cartOrderDetailsContainer}>
             <span>Total de itens</span>
             <span>R$ 29,70</span>
             <span>Entrega</span>
@@ -54,7 +58,9 @@ export function Checkout() {
             <strong>Total</strong>
             <strong>R$ 33,20</strong>
           </div>
-          <button>confirmar pedido</button>
+          <button className={styles.processOrderButton}>
+            confirmar pedido
+          </button>
         </div>
       </div>
     </div>

@@ -1,0 +1,93 @@
+.coffeeInCartCardContainer {
+  display: flex;
+  justify-content: space-between;
+
+  img {
+    width: 64px;
+    height: 64px;
+  }
+
+  >div {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  >strong {
+    color: var(--base-text);
+    font-size: 1rem;
+    line-height: 130%;
+    font-weight: bold;
+    padding-left: 2rem;
+  }
+}
+
+.coffeeInCartInformationsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selectAmountContainer {
+  display: flex;
+  align-items: center;
+  line-height: 130%;
+  border-radius: 6px;
+  background-color: var(--base-button);
+  gap: 0.25rem;
+  padding: 0.5rem;
+
+  span {
+    color: var(--base-title);
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple);
+    border: none;
+    background: none;
+
+    &:hover {
+      cursor: pointer;
+      color: var(--purple-dark);
+    }
+  }
+}
+
+.removeFromCartButton {
+  display: flex;
+  align-items: center;
+  line-height: 130%;
+  border-radius: 6px;
+  background-color: var(--base-button);
+  gap: 0.25rem;
+  padding: 0.5rem;
+  color: var(--base-title);
+  border: none;
+
+  svg {
+    color: var(--purple);
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--base-hover);
+  }
+}
+
+.separatorContainer {
+  padding: 1.5rem 0;
+
+  hr {
+    border-color: var(--base-button);
+    background: none;
+  }
+}

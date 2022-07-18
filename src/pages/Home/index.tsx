@@ -2,7 +2,7 @@ import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 
 import copoImg from '../../assets/copo.png'
-import { CoffeeCard } from '../../components/CoffeCard'
+import { CoffeeCard } from '../../components/CoffeeCard'
 import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 import { api } from '../../services/api'
 import { CoffeeDTO } from '../../types/CoffeeDTO'

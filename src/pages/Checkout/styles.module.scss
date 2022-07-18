@@ -1,12 +1,25 @@
 .checkoutContainer {
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   margin-top: 2.5rem;
+  gap: 2rem;
 }
 
-.completeYourOrderContainer {}
+.completeYourOrderContainer {
+  gap: 0.75rem;
 
-.cartContainer {}
+  >div {
+    border-radius: 6px;
+  }
+}
+
+.cartContainer {
+  >div {
+    border-radius: 6px 44px;
+  }
+}
 
 .completeYourOrderContainer,
 .cartContainer {
@@ -14,5 +27,56 @@
     font-family: 'Baloo 2', cursive;
     line-height: 130%;
     font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  >div {
+    background: var(--base-card);
+    padding: 2.5rem;
+  }
+}
+
+.cartOrderDetailsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  line-height: 130%;
+
+  span {
+    color: var(--base-text);
+    font-size: 0.875rem;
+  }
+
+  strong {
+    color: var(--base-subtitle);
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+  span:nth-child(2n) {
+    text-align: right;
+  }
+
+  strong:nth-child(2n) {
+    text-align: right;
+  }
+}
+
+.processOrderButton {
+  background: var(--yellow);
+  color: var(--white);
+  padding: 0.75rem 0.5rem;
+  width: 100%;
+  border: none;
+  text-transform: uppercase;
+  line-height: 160%;
+  font-weight: bold;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  transition: background 0.1s ease-in-out;
+
+  &:hover {
+    background: var(--yellow-dark);
   }
 }
