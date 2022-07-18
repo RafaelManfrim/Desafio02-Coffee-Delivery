@@ -1,5 +1,6 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
 import { CoffeeInCartCard } from '../../components/CoffeeInCartCard'
+import { PaymentOption } from '../../components/PaymentOption'
 
 import styles from './styles.module.scss'
 
@@ -9,8 +10,10 @@ export function Checkout() {
       <div className={styles.completeYourOrderContainer}>
         <h4>Complete seu pedido</h4>
         <div>
-          <div>
-            <MapPinLine />
+          <div
+            className={`${styles.checkoutCardTitle} ${styles.iconYellowDark}`}
+          >
+            <MapPinLine size={22} />
             <div>
               <span>Endereço de Entrega</span>
               <p>Informe o endereço onde deseja receber seu pedido</p>
@@ -27,8 +30,8 @@ export function Checkout() {
           </div>
         </div>
         <div>
-          <div>
-            <CurrencyDollar />
+          <div className={`${styles.checkoutCardTitle} ${styles.iconPurple}`}>
+            <CurrencyDollar size={22} />
             <div>
               <span>Pagamento</span>
               <p>
@@ -36,10 +39,10 @@ export function Checkout() {
               </p>
             </div>
           </div>
-          <div>
-            <input type="text" placeholder="Cartão de crédito" />
-            <input type="text" placeholder="cartão de débito" />
-            <input type="text" placeholder="dinheiro" />
+          <div className={styles.paymentOptionsContainer}>
+            <PaymentOption name="Cartão de crédito" icon="credit" />
+            <PaymentOption name="Cartão de débito" icon="debit" />
+            <PaymentOption name="Dinheiro" icon="money" isSelected />
           </div>
         </div>
       </div>

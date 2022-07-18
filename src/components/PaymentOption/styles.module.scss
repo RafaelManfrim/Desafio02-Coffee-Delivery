@@ -1,0 +1,33 @@
+.paymentOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 1rem;
+  background: var(--base-button);
+  border-radius: 6px;
+  gap: 0.75rem;
+
+  transition: background-color 0.1s ease-in-out;
+
+  svg {
+    color: var(--purple);
+  }
+
+  span {
+    text-transform: uppercase;
+    color: var(--base-text);
+    line-height: 160%;
+    font-size: 0.75rem;
+  }
+
+  &:not(.selected):hover {
+    cursor: pointer;
+    background-color: var(--base-hover);
+  }
+}
+
+.selected {
+  background-color: var(--purple-light);
+  border: 1px solid var(--purple);
+}

@@ -1,6 +1,4 @@
 .checkoutContainer {
-  // display: flex;
-  // justify-content: space-between;
   display: grid;
   grid-template-columns: 1fr auto;
   margin-top: 2.5rem;
@@ -8,11 +6,49 @@
 }
 
 .completeYourOrderContainer {
-  gap: 0.75rem;
+
+  >div+div {
+    margin-top: 0.75rem;
+  }
 
   >div {
     border-radius: 6px;
   }
+}
+
+.checkoutCardTitle {
+  line-height: 130%;
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+
+  span {
+    color: var(--subtitle);
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: var(--base-text);
+  }
+}
+
+.iconYellowDark {
+  svg {
+    color: var(--yellow-dark);
+  }
+}
+
+.iconPurple {
+  svg {
+    color: var(--purple);
+  }
+}
+
+.paymentOptionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .cartContainer {
