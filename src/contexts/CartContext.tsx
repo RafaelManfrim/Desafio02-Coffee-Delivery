@@ -9,9 +9,9 @@ interface CartItem {
 interface CartContextData {
   cartItems: CartItem[]
   addCoffeeToCart: (item: CartItem) => void
-  addMoreOneToCart: (coffeeId: number) => void
-  removeOneFromCoffeeAmountInCart: (coffeeId: number) => void
-  removeCoffeeFromCart: (coffeeId: number) => void
+  addAmountToCart: ({ coffeeId, amount }: CartItem) => void
+  removeOneFromCart: (coffeeId: number) => void
+  removeFromCart: (coffeeId: number) => void
 }
 
 export const CartContext = createContext({} as CartContextData)
@@ -24,21 +24,20 @@ export function CartContextProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
 
   function addCoffeeToCart(item: CartItem) {
-    console.log(item)
     setCartItems((prevCartItems) => [...prevCartItems, item])
   }
 
-  function addMoreOneToCart(coffeeId: number) {
+  function addAmountToCart({ coffeeId, amount }: CartItem) {
     setCartItems((prevCartItems) =>
       prevCartItems.map((item) =>
         item.coffeeId === coffeeId
-          ? { ...item, amount: item.amount + 1 }
+          ? { ...item, amount: item.amount + amount }
           : item,
       ),
     )
   }
 
-  function removeOneFromCoffeeAmountInCart(coffeeId: number) {
+  function removeOneFromCart(coffeeId: number) {
     setCartItems((prevCartItems) =>
       prevCartItems.map((item) =>
         item.coffeeId === coffeeId
@@ -48,7 +47,7 @@ export function CartContextProvider({ children }: CartProviderProps) {
     )
   }
 
-  function removeCoffeeFromCart(coffeeId: number) {
+  function removeFromCart(coffeeId: number) {
     setCartItems((prevCartItems) =>
       prevCartItems.filter((item) => item.coffeeId !== coffeeId),
     )
@@ -59,9 +58,9 @@ export function CartContextProvider({ children }: CartProviderProps) {
       value={{
         cartItems,
         addCoffeeToCart,
-        addMoreOneToCart,
-        removeOneFromCoffeeAmountInCart,
-        removeCoffeeFromCart,
+        addAmountToCart,
+        removeOneFromCart,
+        removeFromCart,
       }}
     >
       {children}

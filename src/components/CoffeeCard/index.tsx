@@ -17,13 +17,22 @@ export function CoffeeCard({
   price,
 }: CoffeeCardProps) {
   const [coffeeAmount, setCoffeeAmount] = useState(1)
-  const { addCoffeeToCart } = useCart()
+  const { cartItems, addCoffeeToCart, addAmountToCart } = useCart()
 
   function handleAddCoffeeToCart() {
-    addCoffeeToCart({
-      coffeeId: id,
-      amount: coffeeAmount,
-    })
+    const coffeeAlreadyInCart = cartItems.find((item) => item.coffeeId === id)
+
+    if (coffeeAlreadyInCart) {
+      addAmountToCart({
+        coffeeId: id,
+        amount: coffeeAmount,
+      })
+    } else {
+      addCoffeeToCart({
+        coffeeId: id,
+        amount: coffeeAmount,
+      })
+    }
 
     setCoffeeAmount(1)
   }
