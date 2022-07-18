@@ -1,4 +1,4 @@
-import { ShoppingCart } from 'phosphor-react'
+import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 
 import { CoffeeDTO } from '../../types/CoffeeDTO'
 
@@ -29,11 +29,21 @@ export function CoffeeCard({
 
         <div>
           <div className={styles.priceContainer}>
-            R$ <span>{price}</span>
+            R$ <strong>{String(price).replace('.', ',')}</strong>
           </div>
-          <div> - 1 + </div>
-          <div>
-            <ShoppingCart size={22} weight="fill" />
+          <div className={styles.addToCartContainer}>
+            <div className={styles.selectAmountContainer}>
+              <button>
+                <Minus weight="bold" size={16} />
+              </button>
+              <span>1</span>
+              <button>
+                <Plus weight="bold" size={16} />
+              </button>
+            </div>
+            <button className={styles.addToCartButton}>
+              <ShoppingCart size={22} weight="fill" />
+            </button>
           </div>
         </div>
       </div>

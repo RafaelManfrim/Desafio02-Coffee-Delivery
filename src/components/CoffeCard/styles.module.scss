@@ -21,11 +21,11 @@
     text-transform: uppercase;
     color: var(--yellow-dark);
     background: var(--yellow-light);
-    padding: 0.5rem 0.25rem;
+    padding: 0.25rem 0.5rem;
     font-weight: bold;
     font-size: 0.625rem;
     line-height: 130%;
-    // border-radius: 50%;
+    border-radius: 6px;
   }
 }
 
@@ -57,5 +57,67 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem 1.25rem;
+  }
+}
+
+.priceContainer {
+  font-size: 0.875rem;
+  line-height: 130%;
+
+  strong {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.5rem;
+  }
+}
+
+.addToCartContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .selectAmountContainer {
+    display: flex;
+    align-items: center;
+    line-height: 130%;
+    border-radius: 6px;
+    background-color: var(--base-button);
+    gap: 0.25rem;
+    padding: 0.5rem;
+
+    span {
+      color: var(--base-title);
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple);
+      border: none;
+      background: none;
+
+      &:hover {
+        cursor: pointer;
+        color: var(--purple-dark);
+      }
+    }
+  }
+
+  .addToCartButton {
+    background: var(--purple-dark);
+    border-radius: 6px;
+    color: var(--base-card);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+
+    border: none;
+    transition: background 0.2s ease-in-out;
+
+    &:hover {
+      background: var(--purple);
+    }
   }
 }
