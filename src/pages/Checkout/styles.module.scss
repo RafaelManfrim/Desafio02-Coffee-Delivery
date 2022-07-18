@@ -6,13 +6,14 @@
 }
 
 .completeYourOrderContainer {
-
-  >div+div {
-    margin-top: 0.75rem;
-  }
+  max-width: 920px;
 
   >div {
     border-radius: 6px;
+  }
+
+  >div+div {
+    margin-top: 0.75rem;
   }
 }
 
@@ -42,6 +43,46 @@
   svg {
     color: var(--purple);
   }
+}
+
+.inputsContainer {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  >div {
+    gap: 0.75rem;
+    display: flex;
+  }
+}
+
+.checkoutInput {
+  border: 1px solid var(--base-button);
+  border-radius: 4px;
+  padding: 0.75rem;
+  background-color: var(--base-input);
+  color: var(--base-text);
+  font-size: 0.875rem;
+  line-height: 130%;
+  width: 12.5rem;
+
+  &:placeholder {
+    color: var(--base-label);
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid var(--yellow-dark);
+  }
+}
+
+.fullInput {
+  flex: 1;
+}
+
+.miniInput {
+  width: 3.75rem;
 }
 
 .paymentOptionsContainer {

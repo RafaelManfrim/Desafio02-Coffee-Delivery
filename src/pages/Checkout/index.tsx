@@ -19,14 +19,50 @@ export function Checkout() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </div>
           </div>
-          <div>
-            <input type="text" placeholder="CEP" />
-            <input type="text" placeholder="Rua" />
-            <input type="text" placeholder="Número" />
-            <input type="text" placeholder="Complemento" />
-            <input type="text" placeholder="Bairro" />
-            <input type="text" placeholder="Cidade" />
-            <input type="text" placeholder="UF" />
+          <div className={styles.inputsContainer}>
+            <div>
+              <input
+                type="text"
+                placeholder="CEP"
+                className={styles.checkoutInput}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Rua"
+                className={`${styles.checkoutInput} ${styles.fullInput}`}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Número"
+                className={styles.checkoutInput}
+              />
+              <input
+                type="text"
+                placeholder="Complemento"
+                className={`${styles.checkoutInput} ${styles.fullInput}`}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Bairro"
+                className={styles.checkoutInput}
+              />
+              <input
+                type="text"
+                placeholder="Cidade"
+                className={`${styles.checkoutInput} ${styles.fullInput}`}
+              />
+              <input
+                type="text"
+                placeholder="UF"
+                className={`${styles.checkoutInput} ${styles.miniInput}`}
+              />
+            </div>
           </div>
         </div>
         <div>
