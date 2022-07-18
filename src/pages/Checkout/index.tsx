@@ -4,8 +4,8 @@ import styles from './styles.module.scss'
 
 export function Checkout() {
   return (
-    <div>
-      <div>
+    <div className={styles.checkoutContainer}>
+      <div className={styles.completeYourOrderContainer}>
         <h4>Complete seu pedido</h4>
         <div>
           <div>
@@ -42,7 +42,7 @@ export function Checkout() {
           </div>
         </div>
       </div>
-      <div>
+      <div className={styles.cartContainer}>
         <h4>Cafés selecionados</h4>
         <div>
           <div>Carrinho</div>

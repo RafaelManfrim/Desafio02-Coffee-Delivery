@@ -2,21 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 10rem;
-  width: 100%;
-  background: url("../../assets/backgroud-home.png");
   height: 544px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-
-  @media (max-width: 1440px) {
-    padding: 2rem 8rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 2rem 5rem;
-  }
 
   >div {
     gap: 3.5rem;
@@ -87,17 +73,6 @@
 }
 
 .listContainer {
-  padding: 2rem 10rem;
-  width: 100%;
-
-  @media (max-width: 1440px) {
-    padding: 2rem 8rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 2rem 5rem;
-  }
-
   >h2 {
     font-size: 2rem;
     line-height: 130%;

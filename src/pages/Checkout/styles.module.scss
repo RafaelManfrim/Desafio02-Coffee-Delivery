@@ -1,0 +1,18 @@
+.checkoutContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+}
+
+.completeYourOrderContainer {}
+
+.cartContainer {}
+
+.completeYourOrderContainer,
+.cartContainer {
+  h4 {
+    font-family: 'Baloo 2', cursive;
+    line-height: 130%;
+    font-size: 1.125rem;
+  }
+}

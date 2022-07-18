@@ -1,1 +1,12 @@
-.default-layout-container {}
+.defaultLayoutContainer {
+  padding: 2rem 10rem;
+  width: 100%;
+
+  @media (max-width: 1440px) {
+    padding: 2rem 8rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 5rem;
+  }
+}
