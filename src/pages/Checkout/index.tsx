@@ -5,10 +5,14 @@ import { useOrder } from '../../hooks/useOrder'
 import { useCoffees } from '../../hooks/useCoffees'
 
 import styles from './styles.module.scss'
+import { useForm } from 'react-hook-form'
 
 export function Checkout() {
-  const { cartItems, paymentMethods, paymentMethodSelect } = useOrder()
+  const { cartItems, paymentMethods, paymentMethodSelect, deliveryAddress } =
+    useOrder()
   const { coffees } = useCoffees()
+
+  const { register, handleSubmit } = useForm({})
 
   const totalPrice = cartItems.reduce((acc, item) => {
     const coffee = coffees.find((coffee) => coffee.id === item.coffeeId)
