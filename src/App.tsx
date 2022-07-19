@@ -1,16 +1,16 @@
 import { BrowserRouter } from 'react-router-dom'
-import { CartContextProvider } from './contexts/CartContext'
+import { OrderContextProvider } from './contexts/OrderContext'
 import { CoffeesContextProvider } from './contexts/CoffeesContext'
 import { Router } from './Router'
 
 export function App() {
   return (
     <CoffeesContextProvider>
-      <CartContextProvider>
+      <OrderContextProvider>
         <BrowserRouter>
           <Router />
         </BrowserRouter>
-      </CartContextProvider>
+      </OrderContextProvider>
     </CoffeesContextProvider>
   )
 }

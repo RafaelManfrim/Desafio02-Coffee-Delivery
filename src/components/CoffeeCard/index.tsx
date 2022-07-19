@@ -1,6 +1,6 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useState } from 'react'
-import { useCart } from '../../hooks/useCart'
+import { useOrder } from '../../hooks/useOrder'
 
 import { CoffeeDTO } from '../../types/CoffeeDTO'
 
@@ -17,7 +17,17 @@ export function CoffeeCard({
   price,
 }: CoffeeCardProps) {
   const [coffeeAmount, setCoffeeAmount] = useState(1)
-  const { cartItems, addCoffeeToCart, addAmountToCart } = useCart()
+  const { cartItems, addCoffeeToCart, addAmountToCart } = useOrder()
+
+  function addOneToCoffeeAmount() {
+    setCoffeeAmount((state) => state + 1)
+  }
+
+  function removeOneFromCoffeeAmount() {
+    if (coffeeAmount > 1) {
+      setCoffeeAmount((state) => state - 1)
+    }
+  }
 
   function handleAddCoffeeToCart() {
     const coffeeAlreadyInCart = cartItems.find((item) => item.coffeeId === id)
@@ -57,11 +67,11 @@ export function CoffeeCard({
           </div>
           <div className={styles.addToCartContainer}>
             <div className={styles.selectAmountContainer}>
-              <button onClick={() => setCoffeeAmount((state) => state - 1)}>
+              <button onClick={removeOneFromCoffeeAmount}>
                 <Minus weight="bold" size={16} />
               </button>
               <span>{coffeeAmount}</span>
-              <button onClick={() => setCoffeeAmount((state) => state + 1)}>
+              <button onClick={addOneToCoffeeAmount}>
                 <Plus weight="bold" size={16} />
               </button>
             </div>

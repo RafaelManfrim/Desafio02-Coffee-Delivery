@@ -1,13 +1,13 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
 import { CoffeeInCartCard } from '../../components/CoffeeInCartCard'
-import { PaymentOption } from '../../components/PaymentOption'
-import { useCart } from '../../hooks/useCart'
+import { PaymentMethod } from '../../components/PaymentMethod'
+import { useOrder } from '../../hooks/useOrder'
 import { useCoffees } from '../../hooks/useCoffees'
 
 import styles from './styles.module.scss'
 
 export function Checkout() {
-  const { cartItems } = useCart()
+  const { cartItems, paymentMethods, paymentMethodSelect } = useOrder()
   const { coffees } = useCoffees()
 
   const totalPrice = cartItems.reduce((acc, item) => {
@@ -18,6 +18,8 @@ export function Checkout() {
       return acc
     }
   }, 0)
+
+  const deliveryTax = cartItems.length > 0 ? totalPrice * 0.025 + 2.5 : 0
 
   return (
     <div className={styles.checkoutContainer}>
@@ -89,10 +91,14 @@ export function Checkout() {
               </p>
             </div>
           </div>
-          <div className={styles.paymentOptionsContainer}>
-            <PaymentOption name="Cartão de crédito" icon="credit" />
-            <PaymentOption name="Cartão de débito" icon="debit" />
-            <PaymentOption name="Dinheiro" icon="money" isSelected />
+          <div className={styles.paymentMethodsContainer}>
+            {paymentMethods.map((method) => (
+              <PaymentMethod
+                key={method}
+                method={method}
+                isSelected={method === paymentMethodSelect}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -129,13 +135,18 @@ export function Checkout() {
               }).format(totalPrice)}
             </span>
             <span>Entrega</span>
-            <span>R$ 3,50</span>
+            <span>
+              {Intl.NumberFormat('pt-br', {
+                currency: 'BRL',
+                style: 'currency',
+              }).format(deliveryTax)}
+            </span>
             <strong>Total</strong>
             <strong>
               {Intl.NumberFormat('pt-br', {
                 currency: 'BRL',
                 style: 'currency',
-              }).format(totalPrice + 3.5)}
+              }).format(totalPrice + deliveryTax)}
             </strong>
           </div>
           <button className={styles.processOrderButton}>

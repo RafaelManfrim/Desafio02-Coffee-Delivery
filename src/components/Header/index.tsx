@@ -2,11 +2,11 @@ import { MapPin, ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
 
 import logoCoffeeDelivery from '../../assets/logo.svg'
-import { useCart } from '../../hooks/useCart'
+import { useOrder } from '../../hooks/useOrder'
 import styles from './styles.module.scss'
 
 export function Header() {
-  const { cartItems } = useCart()
+  const { cartItems } = useOrder()
 
   return (
     <div className={styles.headerContainer}>

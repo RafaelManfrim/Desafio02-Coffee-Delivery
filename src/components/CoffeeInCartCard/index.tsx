@@ -1,5 +1,5 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
-import { useCart } from '../../hooks/useCart'
+import { useOrder } from '../../hooks/useOrder'
 
 import styles from './styles.module.scss'
 
@@ -14,7 +14,7 @@ interface CoffeeInCardProps {
 export function CoffeeInCartCard(props: CoffeeInCardProps) {
   const { id, name, amount, image, price } = props
 
-  const { addAmountToCart, removeOneFromCart, removeFromCart } = useCart()
+  const { addAmountToCart, removeOneFromCart, removeFromCart } = useOrder()
 
   function handleAddOneToCart() {
     addAmountToCart({ coffeeId: id, amount: 1 })
@@ -45,8 +45,11 @@ export function CoffeeInCartCard(props: CoffeeInCardProps) {
                   <Plus weight="bold" size={16} />
                 </button>
               </div>
-              <button className={styles.removeFromCartButton}>
-                <Trash size={16} onClick={handleRemoveCoffee} />
+              <button
+                className={styles.removeFromCartButton}
+                onClick={handleRemoveCoffee}
+              >
+                <Trash size={16} />
                 Remover
               </button>
             </div>
