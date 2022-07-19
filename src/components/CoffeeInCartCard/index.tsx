@@ -1,34 +1,63 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
+import { useCart } from '../../hooks/useCart'
 
-import cafe from '../../assets/americano.png'
 import styles from './styles.module.scss'
 
-export function CoffeeInCartCard() {
+interface CoffeeInCardProps {
+  id: number
+  name: string
+  amount: number
+  image: string
+  price: number
+}
+
+export function CoffeeInCartCard(props: CoffeeInCardProps) {
+  const { id, name, amount, image, price } = props
+
+  const { addAmountToCart, removeOneFromCart, removeFromCart } = useCart()
+
+  function handleAddOneToCart() {
+    addAmountToCart({ coffeeId: id, amount: 1 })
+  }
+
+  function handleRemoveOneFromCart() {
+    removeOneFromCart(id)
+  }
+
+  function handleRemoveCoffee() {
+    removeFromCart(id)
+  }
+
   return (
     <>
       <div className={styles.coffeeInCartCardContainer}>
         <div>
-          <img src={cafe} alt="" />
+          <img src={`/src/assets/${image}`} alt="" />
           <div className={styles.coffeeInCartInformationsContainer}>
-            <span>Americano</span>
+            <span>{name}</span>
             <div className={styles.actionsContainer}>
               <div className={styles.selectAmountContainer}>
-                <button>
+                <button onClick={handleRemoveOneFromCart}>
                   <Minus weight="bold" size={16} />
                 </button>
-                <span>1</span>
-                <button>
+                <span>{amount}</span>
+                <button onClick={handleAddOneToCart}>
                   <Plus weight="bold" size={16} />
                 </button>
               </div>
               <button className={styles.removeFromCartButton}>
-                <Trash size={16} />
+                <Trash size={16} onClick={handleRemoveCoffee} />
                 Remover
               </button>
             </div>
           </div>
         </div>
-        <strong>R$ 9,90</strong>
+        <strong>
+          {Intl.NumberFormat('pt-br', {
+            currency: 'BRL',
+            style: 'currency',
+          }).format(price * amount)}
+        </strong>
       </div>
       <div className={styles.separatorContainer}>
         <hr />

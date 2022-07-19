@@ -1,10 +1,24 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
 import { CoffeeInCartCard } from '../../components/CoffeeInCartCard'
 import { PaymentOption } from '../../components/PaymentOption'
+import { useCart } from '../../hooks/useCart'
+import { useCoffees } from '../../hooks/useCoffees'
 
 import styles from './styles.module.scss'
 
 export function Checkout() {
+  const { cartItems } = useCart()
+  const { coffees } = useCoffees()
+
+  const totalPrice = cartItems.reduce((acc, item) => {
+    const coffee = coffees.find((coffee) => coffee.id === item.coffeeId)
+    if (coffee) {
+      return acc + coffee.price * item.amount
+    } else {
+      return acc
+    }
+  }, 0)
+
   return (
     <div className={styles.checkoutContainer}>
       <div className={styles.completeYourOrderContainer}>
@@ -86,16 +100,43 @@ export function Checkout() {
         <h4>Cafés selecionados</h4>
         <div>
           <div>
-            <CoffeeInCartCard />
-            <CoffeeInCartCard />
+            {cartItems.map((item) => {
+              const coffee = coffees.find(
+                (coffee) => coffee.id === item.coffeeId,
+              )
+              if (coffee) {
+                return (
+                  <CoffeeInCartCard
+                    key={coffee.id}
+                    id={coffee.id}
+                    name={coffee.name}
+                    image={coffee.image}
+                    amount={item.amount}
+                    price={coffee.price}
+                  />
+                )
+              } else {
+                return null
+              }
+            })}
           </div>
           <div className={styles.cartOrderDetailsContainer}>
             <span>Total de itens</span>
-            <span>R$ 29,70</span>
+            <span>
+              {Intl.NumberFormat('pt-br', {
+                currency: 'BRL',
+                style: 'currency',
+              }).format(totalPrice)}
+            </span>
             <span>Entrega</span>
             <span>R$ 3,50</span>
             <strong>Total</strong>
-            <strong>R$ 33,20</strong>
+            <strong>
+              {Intl.NumberFormat('pt-br', {
+                currency: 'BRL',
+                style: 'currency',
+              }).format(totalPrice + 3.5)}
+            </strong>
           </div>
           <button className={styles.processOrderButton}>
             confirmar pedido
