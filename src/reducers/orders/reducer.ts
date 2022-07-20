@@ -1,26 +1,17 @@
 import { ActionTypes } from './actions'
 import { produce } from 'immer'
+import { AddressSchema } from '../../pages/Checkout'
 
 export interface CartItem {
   coffeeId: number
   amount: number
 }
 
-export interface DeliveryAddress {
-  cep: string
-  street: string
-  number: number
-  complement: string
-  district: string
-  city: string
-  stateUF: string
-}
-
 interface OrderState {
   cartItems: CartItem[]
   paymentMethods: ['debit', 'credit', 'money']
   paymentMethodSelect?: 'debit' | 'credit' | 'money'
-  deliveryAddress?: DeliveryAddress
+  deliveryAddress?: AddressSchema
 }
 
 export function ordersReducer(state: OrderState, action: any) {
@@ -59,6 +50,20 @@ export function ordersReducer(state: OrderState, action: any) {
     case ActionTypes.SET_PAYMENT_METHOD:
       return produce(state, (draft) => {
         draft.paymentMethodSelect = action.payload.method
+      })
+    case ActionTypes.SET_DELIVERY_ADDRESS:
+      return produce(state, (draft) => {
+        const { cep, street, number, complement, district, city, stateUF } =
+          action.payload.address
+        draft.deliveryAddress = {
+          cep,
+          street,
+          number,
+          complement,
+          district,
+          city,
+          stateUF,
+        }
       })
     case ActionTypes.CONFIRM_ORDER:
       return produce(state, (draft) => {

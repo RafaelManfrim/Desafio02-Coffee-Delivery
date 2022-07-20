@@ -1,27 +1,29 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react'
+
+import { AddressSchema } from '../pages/Checkout'
+import { CartItem, ordersReducer } from '../reducers/orders/reducer'
 import {
   addAmountToCartAction,
   addCoffeeToCartAction,
+  confirmOrderAction,
   removeFromCartAction,
   removeOneFromCartAction,
+  setDeliveryAddressAction,
   setPaymentMethodAction,
 } from '../reducers/orders/actions'
-import {
-  CartItem,
-  DeliveryAddress,
-  ordersReducer,
-} from '../reducers/orders/reducer'
+import { api } from '../services/api'
 
 interface OrderContextData {
   cartItems: CartItem[]
   paymentMethods: ['debit', 'credit', 'money']
   paymentMethodSelect?: 'debit' | 'credit' | 'money'
-  deliveryAddress?: DeliveryAddress
+  deliveryAddress?: AddressSchema
   addCoffeeToCart: (item: CartItem) => void
   addAmountToCart: ({ coffeeId, amount }: CartItem) => void
   removeOneFromCart: (coffeeId: number) => void
   removeFromCart: (coffeeId: number) => void
   setPaymentMethod: (method: 'debit' | 'credit' | 'money') => void
+  completeOrder: (address: AddressSchema) => Promise<void>
 }
 
 export const OrderContext = createContext({} as OrderContextData)
@@ -80,6 +82,23 @@ export function OrderContextProvider({ children }: OrderProviderProps) {
     dispatch(setPaymentMethodAction(method))
   }
 
+  async function completeOrder(address: AddressSchema) {
+    dispatch(setDeliveryAddressAction(address))
+    try {
+      const newOrder = {
+        items: cartItems,
+        paymentMethod: paymentMethodSelect,
+        orderDate: new Date(),
+        deliveryAddress: address,
+      }
+
+      await api.post('/orders/', { ...newOrder })
+      dispatch(confirmOrderAction())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     const stateJSON = JSON.stringify(ordersState)
     localStorage.setItem('@coffee-delivery:orders-state-2.0.0', stateJSON)
@@ -97,6 +116,7 @@ export function OrderContextProvider({ children }: OrderProviderProps) {
         removeOneFromCart,
         removeFromCart,
         setPaymentMethod,
+        completeOrder,
       }}
     >
       {children}

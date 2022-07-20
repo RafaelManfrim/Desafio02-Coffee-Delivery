@@ -6,7 +6,7 @@ import { useOrder } from '../../hooks/useOrder'
 import styles from './styles.module.scss'
 
 export function Header() {
-  const { cartItems } = useOrder()
+  const { cartItems, deliveryAddress } = useOrder()
 
   return (
     <div className={styles.headerContainer}>
@@ -20,7 +20,7 @@ export function Header() {
         <NavLink to="/checkout">
           <button className={styles.location}>
             <MapPin size={22} weight="fill" />
-            Novo Horizonte, SP
+            {deliveryAddress?.city}, {deliveryAddress?.stateUF}
           </button>
         </NavLink>
         <NavLink className={styles.cart} to="/checkout">

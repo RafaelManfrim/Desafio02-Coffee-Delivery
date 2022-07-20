@@ -1,12 +1,14 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 
 import motoboyImg from '../../assets/motoboy.svg'
+import { useOrder } from '../../hooks/useOrder'
 import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 
 import styles from './styles.module.scss'
 
 export function Success() {
   const { width } = useWindowDimensions()
+  const { deliveryAddress, paymentMethodSelect, cartItems } = useOrder()
 
   return (
     <div className={styles.successContainer}>
@@ -20,9 +22,14 @@ export function Success() {
             </div>
             <div className={styles.informationText}>
               <span>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em{' '}
+                <strong>
+                  {deliveryAddress?.street}, {deliveryAddress?.number}
+                </strong>
               </span>
-              <span>Farrapos - Porto Alegre, RS</span>
+              <span>
+                {deliveryAddress?.city} - {deliveryAddress?.stateUF}
+              </span>
             </div>
           </div>
           <div className={styles.information}>
@@ -40,7 +47,13 @@ export function Success() {
             </div>
             <div className={styles.informationText}>
               <span>Pagamento na entrega</span>
-              <strong>Cartão de Crédito</strong>
+              {paymentMethodSelect === 'debit' && (
+                <strong>Cartão de débito</strong>
+              )}
+              {paymentMethodSelect === 'credit' && (
+                <strong>Cartão de crédito</strong>
+              )}
+              {paymentMethodSelect === 'money' && <strong>Dinheiro</strong>}
             </div>
           </div>
         </div>

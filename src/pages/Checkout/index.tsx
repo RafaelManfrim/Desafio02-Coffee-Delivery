@@ -1,18 +1,53 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
 import { CoffeeInCartCard } from '../../components/CoffeeInCartCard'
 import { PaymentMethod } from '../../components/PaymentMethod'
 import { useOrder } from '../../hooks/useOrder'
 import { useCoffees } from '../../hooks/useCoffees'
+import { cepMask } from '../../utils/cepMask'
 
 import styles from './styles.module.scss'
-import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+
+const addressSchema = zod.object({
+  cep: zod.string().length(10, 'CEP inválido'),
+  city: zod.string(),
+  street: zod.string(),
+  number: zod.string(),
+  complement: zod.string(),
+  district: zod.string(),
+  stateUF: zod.string(),
+})
+
+export type AddressSchema = zod.infer<typeof addressSchema>
 
 export function Checkout() {
-  const { cartItems, paymentMethods, paymentMethodSelect, deliveryAddress } =
-    useOrder()
-  const { coffees } = useCoffees()
+  const {
+    cartItems,
+    paymentMethods,
+    paymentMethodSelect,
+    deliveryAddress,
+    completeOrder,
+  } = useOrder()
 
-  const { register, handleSubmit } = useForm({})
+  const { coffees } = useCoffees()
+  const navigate = useNavigate()
+
+  const { register, handleSubmit } = useForm<AddressSchema>({
+    defaultValues: {
+      cep: deliveryAddress?.cep,
+      city: deliveryAddress?.city,
+      street: deliveryAddress?.street,
+      number: deliveryAddress?.number,
+      complement: deliveryAddress?.complement,
+      district: deliveryAddress?.district,
+      stateUF: deliveryAddress?.stateUF,
+    },
+    resolver: zodResolver(addressSchema),
+  })
 
   const totalPrice = cartItems.reduce((acc, item) => {
     const coffee = coffees.find((coffee) => coffee.id === item.coffeeId)
@@ -25,8 +60,16 @@ export function Checkout() {
 
   const deliveryTax = cartItems.length > 0 ? totalPrice * 0.025 + 2.5 : 0
 
+  function handleCompleteOrder(data: AddressSchema) {
+    completeOrder(data)
+    navigate('/success')
+  }
+
   return (
-    <div className={styles.checkoutContainer}>
+    <form
+      className={styles.checkoutContainer}
+      onSubmit={handleSubmit(handleCompleteOrder)}
+    >
       <div className={styles.completeYourOrderContainer}>
         <h4>Complete seu pedido</h4>
         <div>
@@ -45,6 +88,11 @@ export function Checkout() {
                 type="text"
                 placeholder="CEP"
                 className={styles.checkoutInput}
+                {...register('cep')}
+                onChange={(event) => {
+                  const { value } = event.target
+                  event.target.value = cepMask(value)
+                }}
               />
             </div>
             <div>
@@ -52,6 +100,7 @@ export function Checkout() {
                 type="text"
                 placeholder="Rua"
                 className={`${styles.checkoutInput} ${styles.fullInput}`}
+                {...register('street')}
               />
             </div>
             <div>
@@ -59,11 +108,13 @@ export function Checkout() {
                 type="text"
                 placeholder="Número"
                 className={styles.checkoutInput}
+                {...register('number')}
               />
               <input
                 type="text"
                 placeholder="Complemento"
                 className={`${styles.checkoutInput} ${styles.fullInput}`}
+                {...register('complement')}
               />
             </div>
             <div>
@@ -71,16 +122,20 @@ export function Checkout() {
                 type="text"
                 placeholder="Bairro"
                 className={styles.checkoutInput}
+                {...register('district')}
               />
               <input
                 type="text"
                 placeholder="Cidade"
                 className={`${styles.checkoutInput} ${styles.fullInput}`}
+                {...register('city')}
               />
               <input
                 type="text"
                 placeholder="UF"
+                maxLength={2}
                 className={`${styles.checkoutInput} ${styles.miniInput}`}
+                {...register('stateUF')}
               />
             </div>
           </div>
@@ -153,11 +208,15 @@ export function Checkout() {
               }).format(totalPrice + deliveryTax)}
             </strong>
           </div>
-          <button className={styles.processOrderButton}>
+          <button
+            className={styles.processOrderButton}
+            type="submit"
+            disabled={cartItems.length === 0}
+          >
             confirmar pedido
           </button>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
