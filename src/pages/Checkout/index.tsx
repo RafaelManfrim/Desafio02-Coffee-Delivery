@@ -1,4 +1,6 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
+import Skeleton from 'react-loading-skeleton'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
@@ -10,7 +12,7 @@ import { useCoffees } from '../../hooks/useCoffees'
 import { cepMask } from '../../utils/cepMask'
 
 import styles from './styles.module.scss'
-import { useNavigate } from 'react-router-dom'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const addressSchema = zod.object({
   cep: zod.string().length(10, 'CEP inválido'),
@@ -33,7 +35,7 @@ export function Checkout() {
     completeOrder,
   } = useOrder()
 
-  const { coffees } = useCoffees()
+  const { coffees, isLoadingCoffees } = useCoffees()
   const navigate = useNavigate()
 
   const { register, handleSubmit } = useForm<AddressSchema>({
@@ -166,6 +168,16 @@ export function Checkout() {
         <div>
           <div>
             {cartItems.map((item) => {
+              if (isLoadingCoffees) {
+                return (
+                  <>
+                    <Skeleton height={64} width={300} />
+                    <div className={styles.separatorContainer}>
+                      <hr />
+                    </div>
+                  </>
+                )
+              }
               const coffee = coffees.find(
                 (coffee) => coffee.id === item.coffeeId,
               )

@@ -1,14 +1,16 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import Skeleton from 'react-loading-skeleton'
 
 import { CoffeeCard } from '../../components/CoffeeCard'
 import { useCoffees } from '../../hooks/useCoffees'
 import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 import copoImg from '../../assets/copo.png'
 
+import 'react-loading-skeleton/dist/skeleton.css'
 import styles from './styles.module.scss'
 
 export function Home() {
-  const { coffees } = useCoffees()
+  const { coffees, isLoadingCoffees } = useCoffees()
   const { width } = useWindowDimensions()
 
   return (
@@ -59,17 +61,29 @@ export function Home() {
       <main className={styles.listContainer}>
         <h2>Nossos cafés</h2>
         <div className={styles.productList}>
-          {coffees.map((coffee) => (
-            <CoffeeCard
-              key={coffee.id}
-              id={coffee.id}
-              image={coffee.image}
-              description={coffee.description}
-              name={coffee.name}
-              tags={coffee.tags}
-              price={coffee.price}
-            />
-          ))}
+          {isLoadingCoffees ? (
+            <>
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+            </>
+          ) : (
+            coffees.map((coffee) => (
+              <CoffeeCard
+                key={coffee.id}
+                id={coffee.id}
+                image={coffee.image}
+                description={coffee.description}
+                name={coffee.name}
+                tags={coffee.tags}
+                price={coffee.price}
+              />
+            ))
+          )}
         </div>
       </main>
     </div>

@@ -1,10 +1,16 @@
 .coffeeInCartCardContainer {
   display: flex;
   justify-content: space-between;
+  flex: 1;
 
   img {
     width: 64px;
     height: 64px;
+
+    @media (max-width: 1440px) {
+      width: 48px;
+      height: 48px;
+    }
   }
 
   >div {
@@ -19,6 +25,11 @@
     font-weight: bold;
     padding-left: 2rem;
     width: 100px;
+
+    @media (max-width: 1440px) {
+      padding-left: 1.25rem;
+      width: 60px;
+    }
   }
 }
 
@@ -44,6 +55,11 @@
   gap: 0.25rem;
   padding: 0.5rem;
   justify-content: center;
+
+  @media (max-width: 1440px) {
+    line-height: 100%;
+    font-size: 0.875rem;
+  }
 
   span {
     color: var(--base-title);
@@ -78,6 +94,11 @@
   padding: 0.5rem;
   color: var(--base-title);
   border: none;
+
+  @media (max-width: 1440px) {
+    line-height: 100%;
+    font-size: 0.875rem;
+  }
 
   svg {
     color: var(--purple);
